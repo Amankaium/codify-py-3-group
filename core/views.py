@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView
-from .models import Product
-from .serializers import ProductSerializer
+from .models import *
+from .serializers import *
 
 # Create your views here.
 class ProductsListAPIView(ListAPIView):
