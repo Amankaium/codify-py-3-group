@@ -1,6 +1,5 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import UpdateAPIView
 
 from .models import *
 from .serializers import *
@@ -14,23 +13,9 @@ class CategoryList(APIView):
 
 
 class UpdateProductAPIView(APIView):
-    serializer_class = ProductSerializer
-
-    def get(self, request, *args, **kwargs):
-        try:
-            id = request.query_params["id"]
-            if id != None:
-                product = Product.objects.get(id=id)
-                serializer = ProductSerializer(product)
-        except:
-            products = self.get_queryset()
-            serializer = ProductSerializer(products, many=True)
-
-        return Response(serializer.data)
-    
     def put(self, request, *args, **kwargs):
-        id = request.query_params["id"]
-        product_object = Product.objects.get(id=id)
+        pk = kwargs["pk"]
+        product_object = Product.objects.get(pk=pk)
 
         data = request.data
 
