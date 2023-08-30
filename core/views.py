@@ -20,7 +20,8 @@ class CategoryList(APIView):
 
 
 class ProductAPIView(APIView):
-    def get(request, pk):
+    def get(self, request, *args, **kwargs):
+        pk = kwargs['pk']
         product_object = Product.objects.get(pk=pk)
         serializer = ProductSerializer(product_object)
-        return Response(serializer.data, safe=False)
+        return Response(serializer.data)
