@@ -28,7 +28,10 @@ class Purchase(models.Model):
     product = models.ManyToManyField(to=Product, related_name='product', blank=False)
 
     def __str__(self):
-        return f'{self.user} - {self.product.name} - {self.date}'
+        product_names = ', '.join([product.name for product in self.product.all()])
+        return f'{self.user} - {product_names} - {self.date}'
+
+    #   return f'{self.user} - {self.product.name} - {self.date}'
 
     class Meta:
         ordering = ['id']
