@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.views import APIView
 from .filters import ProductFilter  # Import the ProductFilter class
 from .models import *
@@ -17,6 +17,11 @@ class CategoryList(APIView):
         cat_list = Category.objects.all()
         serializer = CategorySerializer(instance=cat_list, many=True)
         return Response(serializer.data)
+
+
+class CreateProductAPIView(CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 class ProductAPIView(APIView):
