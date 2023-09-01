@@ -6,24 +6,23 @@ from .serializers import *
 
 class CategoryList(APIView):
     def get(self, request):
-        cat_list= Category.objects.all()
+        cat_list = Category.objects.all()
         serializer = CategorySerializer(instance=cat_list, many=True)
         return Response(serializer.data)
-
-
 
 class UpdateProductAPIView(APIView):
     def put(self, request, *args, **kwargs):
         pk = kwargs["pk"]
         product_object = Product.objects.get(pk=pk)
-
         data = request.data
+        serializer = ProductSerializer(data=data)
 
-        product_object.name = data["name"]
-        product_object.price = data["price"]
-        product_object.category = data["category"]
+        if serializer.is_valid():
+            product_object.name = serializer.validated_data["name"]
+            product_object.price = serializer.validated_data["price"]
+            product_object.category = serializer.validated_data["category"]
+            product_object.save()
 
-        product_object.save()
+            serializer = ProductSerializer(instance=product_object)
 
-        serializer = ProductSerializer(product_object)
-        return Response(serializer.data)
+            return Response(serializer.data)
