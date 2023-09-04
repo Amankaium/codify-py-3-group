@@ -1,5 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APITestCase
+
 from .factories import CategoryFactory
 from .models import Category
 class CategoriesTest(APITestCase):
