@@ -5,8 +5,12 @@ from .models import Category, Product
 class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Category
-    name = "test Category 1"
 
+    name = factory.Sequence(
+        lambda n: f'Test category {n}'
+    )
+
+    
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
