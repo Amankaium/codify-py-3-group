@@ -1,6 +1,8 @@
 import factory
 from .models import Category, Product
 
+
+
 class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Category
@@ -10,10 +12,11 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
-
     name = factory.Sequence(lambda n: f'Product {n}')
     price = 100
     category = factory.SubFactory(CategoryFactory)
+
+
 
 
 
