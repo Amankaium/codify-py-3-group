@@ -5,7 +5,6 @@ class ProductTestCase(APITestCase):
         self.product_1 = ProductFactory()
         self.product_2 = ProductFactory()
         self.product_3 = ProductFactory()
-
     def test_get_list_of_3_collections(self):
         response = self.client.get('/products/')
         self.assertEqual(response.status_code, 200)

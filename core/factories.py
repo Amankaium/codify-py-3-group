@@ -14,3 +14,6 @@ class ProductFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: f'Product {n}')
     price = 100
     category = factory.SubFactory(CategoryFactory)
+
+
+
