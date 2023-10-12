@@ -1,10 +1,9 @@
-from django.test import TestCase
 from rest_framework.test import APITestCase
 from .models import Category
 from .factories import CategoryFactory, ProductFactory
 
 
-class CategoryListTest(TestCase):
+class CategoryListTest(APITestCase):
     def test_open_category_should_success(self):
 
         response = self.client.get('/category-list/')
@@ -23,6 +22,13 @@ class CategoryTestCase(APITestCase):
         self.assertEqual(category_2.name, response.data[1]["name"])
         self.assertEqual(category_3.name, response.data[2]["name"])
 
+    def test_post_create_of_categorys(self):
+        categorys_data = {
+                'name': 'New Cotegorys',
+            }
+        response = self.client.post('/category-create/', categorys_data)
+        self.assertEqual(response.status_code, 201)
+
         
 class ProductTest(APITestCase):
     def setUp(self):
@@ -34,7 +40,7 @@ class ProductTest(APITestCase):
         self.assertEqual(self.prod.name, response.data["name"])
 
 
-class TestCategoryTestCase(TestCase):
+class TestCategoryTestCase(APITestCase):
     def test_model_category_fields(self):
         category_name = "test category 1"
         new_category = Category.objects.create(name=category_name)
