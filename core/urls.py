@@ -4,6 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('category-list/', CategoryList.as_view(), name='category'),
+    path('category-create/', CategoryCreate.as_view(), name='category-create'),
 
     path('purchase-list/', PurchaseViewSet.as_view({'get': 'list'})),
     path('purchase-update/<int:pk>/', PurchaseViewSet.as_view({'put': 'update'})),
